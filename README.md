@@ -1,4 +1,4 @@
-# Redis Search and Query Workshop
+# Redis Search Workshop
 
 Material practico para un workshop de 40 minutos con clientes de banca.
 
@@ -6,8 +6,10 @@ Material practico para un workshop de 40 minutos con clientes de banca.
 
 - `data/json/*.json`: datos del lab en JSON legible.
 - `data/json/all_json.redis`: indices `ON JSON`, comandos `JSON.SET` y autocomplete para cargar desde RedisInsight.
+- `data/json/vector_cases.json`: casos con embeddings pequenos para similitud vectorial.
 - `queries_json.redis`: queries comentadas contra los indices JSON.
 - `queries_json_run.redis`: queries sin comentarios, listas para pegar en RedisInsight Workbench.
+- `scripts/vector_search.py`: busqueda KNN contra `idx:case_vector_json` sin dependencias externas.
 
 ## Como usarlo
 
@@ -26,7 +28,14 @@ Material practico para un workshop de 40 minutos con clientes de banca.
 - Pega `queries_json_run.redis` en RedisInsight Workbench.
 - Si quieres explicar cada bloque, usa la seccion 3 del sitio.
 
-6. Abre el sitio local:
+6. Ejecuta la busqueda vectorial opcional:
+
+```bash
+REDIS_URL="redis://default:<password>@<host>:<port>" VECTOR_QUERY=fraude python3 scripts/vector_search.py
+REDIS_URL="redis://default:<password>@<host>:<port>" VECTOR_QUERY=credito python3 scripts/vector_search.py
+```
+
+7. Abre el sitio local:
 
 ```bash
 open site/index.html

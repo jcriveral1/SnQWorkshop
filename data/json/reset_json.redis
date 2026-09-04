@@ -1,4 +1,5 @@
 FT.DROPINDEX idx:kb_json DD
 FT.DROPINDEX idx:product_json DD
 FT.DROPINDEX idx:place_json DD
+FT.DROPINDEX idx:case_vector_json DD
 DEL ac:bank_terms

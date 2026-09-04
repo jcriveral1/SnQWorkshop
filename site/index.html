@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Workshop Redis Search and Query para banca</title>
+    <title>Redis Search</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="topbar">
       <div>
         <p class="eyebrow">Workshop de 40 minutos</p>
-        <h1>Redis Search and Query para banca</h1>
+        <h1>Redis Search</h1>
       </div>
       <nav aria-label="Secciones">
         <a href="#setup">Setup</a>
         <a href="#queries">Queries</a>
-        <a href="#decision">Redis vs relacional</a>
+        <a href="#redis-search">Redis Search</a>
       </nav>
     </header>
 
@@ -25,14 +25,14 @@
           <h2>Objetivo</h2>
           <p>
             Cargar datasets bancarios pequenos en Redis Cloud como JSON, crear indices y
-            demostrar busqueda, filtros, geosearch, autocomplete y agregaciones
+            demostrar busqueda, filtros, geosearch, autocomplete, agregaciones y similitud vectorial
             con comandos listos para copiar.
           </p>
         </div>
         <dl class="facts">
-          <div><dt>Datasets</dt><dd>3 x 20 registros</dd></div>
+          <div><dt>Datasets</dt><dd>4 datasets pequeños</dd></div>
           <div><dt>Formato</dt><dd>RedisJSON</dd></div>
-          <div><dt>Indices</dt><dd>TEXT, TAG, NUMERIC, GEO</dd></div>
+          <div><dt>Indices</dt><dd>TEXT, TAG, NUMERIC, GEO, VECTOR</dd></div>
         </dl>
       </section>
 
@@ -72,6 +72,7 @@ data/json/all_json.redis</code></pre>
             <p><strong>Documentos:</strong> `data/json/banking_documents.json`.</p>
             <p><strong>Productos:</strong> `data/json/banking_products.json`.</p>
             <p><strong>Sucursales y ATMs:</strong> `data/json/branches_atms.json`.</p>
+            <p><strong>Vectores:</strong> `data/json/vector_cases.json`.</p>
           </article>
           <article>
             <h3>Carga en Redis</h3>
@@ -81,7 +82,7 @@ data/json/all_json.redis</code></pre>
           <article>
             <h3>Queries</h3>
             <p><strong>Workbench:</strong> copia `queries_json_run.redis` desde el boton de la seccion de preparacion.</p>
-            <p><strong>Indices:</strong> las busquedas usan `idx:kb_json`, `idx:product_json` e `idx:place_json`.</p>
+            <p><strong>Indices:</strong> las busquedas usan `idx:kb_json`, `idx:product_json`, `idx:place_json` e `idx:case_vector_json`.</p>
           </article>
         </div>
       </section>
@@ -96,7 +97,9 @@ data/json/all_json.redis</code></pre>
 
 FT.CREATE idx:product_json ON JSON PREFIX 1 productj: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 4.0 $.description AS description TEXT WEIGHT 1.0 $.type AS type TAG SORTABLE $.segment AS segment TAG SORTABLE $.currency AS currency TAG SORTABLE $.risk AS risk TAG SORTABLE $.channel AS channel TAG SORTABLE $.price AS price NUMERIC SORTABLE $.rate AS rate NUMERIC SORTABLE $.balance_min AS balance_min NUMERIC SORTABLE $.categories[*] AS categories TAG SORTABLE
 
-FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 3.0 $.kind AS kind TAG SORTABLE $.city AS city TAG SORTABLE $.services[*] AS services TAG $.location AS location GEO $.hours AS hours TAG SORTABLE</code></pre>
+FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 3.0 $.kind AS kind TAG SORTABLE $.city AS city TAG SORTABLE $.services[*] AS services TAG $.location AS location GEO $.hours AS hours TAG SORTABLE
+
+FT.CREATE idx:case_vector_json ON JSON PREFIX 1 casevec: LANGUAGE spanish SCHEMA $.title AS title TEXT WEIGHT 3.0 $.description AS description TEXT $.case_type AS case_type TAG SORTABLE $.channel AS channel TAG SORTABLE $.priority AS priority NUMERIC SORTABLE $.embedding AS embedding VECTOR FLAT 6 TYPE FLOAT32 DIM 4 DISTANCE_METRIC COSINE</code></pre>
         <button data-copy>Copiar indices</button>
         <div class="index-notes">
           <article>
@@ -116,6 +119,12 @@ FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name
             <p><strong>Datos:</strong> sucursales y ATMs `placej:*` con ciudad, servicios y coordenadas.</p>
             <p><strong>Campos:</strong> `$.name` es TEXT para buscar por nombre; `$.kind`, `$.city`, `$.services[*]` y `$.hours` son TAG para filtros exactos.</p>
             <p><strong>Geo:</strong> `$.location` es GEO y permite consultas por radio con longitud, latitud, distancia y unidad.</p>
+          </article>
+          <article>
+            <h3>idx:case_vector_json</h3>
+            <p><strong>Datos:</strong> casos bancarios `casevec:*` con texto, tipo, canal, prioridad y embedding.</p>
+            <p><strong>Campos:</strong> `$.title` y `$.description` son TEXT; `$.case_type` y `$.channel` son TAG; `$.priority` es NUMERIC.</p>
+            <p><strong>Vector:</strong> `$.embedding` es VECTOR FLAT con `DIM 4` y distancia COSINE para explicar busqueda por similitud.</p>
           </article>
         </div>
       </section>
@@ -242,28 +251,32 @@ FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 
               <p><strong>Que demuestra:</strong> facetas para contar productos por tipo o por nivel de riesgo dentro de un segmento.</p>
             </div>
           </article>
+
+          <article class="query">
+            <h3>Similitud vectorial</h3>
+            <pre><code>REDIS_URL="redis://default:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;" VECTOR_QUERY=fraude python3 scripts/vector_search.py
+REDIS_URL="redis://default:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;" VECTOR_QUERY=credito python3 scripts/vector_search.py</code></pre>
+            <button data-copy>Copiar</button>
+            <div class="query-note">
+              <p><strong>Datos:</strong> casos `casevec:*` con embeddings pequeños de 4 dimensiones.</p>
+              <p><strong>Sintaxis:</strong> el script ejecuta `FT.SEARCH` con `KNN 2 @embedding $vec AS vector_score` y pasa `$vec` como binario FLOAT32.</p>
+              <p><strong>Que demuestra:</strong> recuperar casos semanticamente similares, por ejemplo fraude parecido a phishing o bloqueo preventivo.</p>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section id="decision">
-        <h2>4. Cuando usar Redis vs una base relacional</h2>
+      <section id="redis-search">
+        <h2>4. Cuando usar Redis Search</h2>
         <div class="decision">
           <article>
-            <h3>Usa Redis Search and Query cuando...</h3>
+            <h3>Usa Redis Search cuando...</h3>
             <ul>
               <li>La experiencia necesita busqueda o filtros con latencia muy baja.</li>
               <li>Quieres combinar texto, TAGs, rangos numericos y GEO en una sola consulta.</li>
               <li>El usuario espera autocomplete, tolerancia a errores o ranking.</li>
+              <li>Necesitas similitud vectorial para encontrar casos, documentos o productos semanticamente cercanos.</li>
               <li>Los datos pueden materializarse desde sistemas core, CRM o canales digitales.</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Usa la base relacional cuando...</h3>
-            <ul>
-              <li>Es la fuente de verdad contable o transaccional.</li>
-              <li>Necesitas integridad referencial fuerte y transacciones complejas.</li>
-              <li>La consulta depende de joins profundos o normalizacion estricta.</li>
-              <li>El caso principal es conciliacion, auditoria historica o reporting regulatorio.</li>
             </ul>
           </article>
         </div>
@@ -276,7 +289,8 @@ FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 
           <a href="https://redis.io/docs/latest/commands/ft.create/">FT.CREATE</a>,
           <a href="https://redis.io/docs/latest/commands/ft.search/">FT.SEARCH</a>,
           <a href="https://redis.io/docs/latest/commands/ft.aggregate/">FT.AGGREGATE</a>
-          y <a href="https://redis.io/docs/latest/commands/ft.spellcheck/">FT.SPELLCHECK</a>.
+          <a href="https://redis.io/docs/latest/commands/ft.spellcheck/">FT.SPELLCHECK</a>
+          y <a href="https://redis.io/docs/latest/develop/ai/search-and-query/vectors/">Vector search</a>.
         </p>
       </section>
     </main>

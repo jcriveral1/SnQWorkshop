@@ -799,6 +799,148 @@
       "hours": "24h"
     }
   ],
+  "vectorCases": [
+    {
+      "id": "casevec:001",
+      "title": "Fraude en tarjeta digital",
+      "description": "Cliente reporta cargos no reconocidos despues de una compra en comercio electronico.",
+      "case_type": "fraude",
+      "channel": "app",
+      "priority": 9,
+      "embedding": [
+        0.95,
+        0.1,
+        0.05,
+        0.02
+      ]
+    },
+    {
+      "id": "casevec:002",
+      "title": "Phishing por SMS",
+      "description": "Cliente recibio enlace falso para validar su cuenta y compartio credenciales.",
+      "case_type": "fraude",
+      "channel": "web",
+      "priority": 10,
+      "embedding": [
+        0.9,
+        0.08,
+        0.08,
+        0.04
+      ]
+    },
+    {
+      "id": "casevec:003",
+      "title": "Bloqueo preventivo de tarjeta",
+      "description": "Se detecta comportamiento anomalo y se bloquea la tarjeta temporalmente.",
+      "case_type": "seguridad",
+      "channel": "app",
+      "priority": 8,
+      "embedding": [
+        0.82,
+        0.12,
+        0.12,
+        0.04
+      ]
+    },
+    {
+      "id": "casevec:004",
+      "title": "Solicitud de credito hipotecario",
+      "description": "Cliente busca financiar vivienda con tasa fija y plazo de largo plazo.",
+      "case_type": "credito",
+      "channel": "sucursal",
+      "priority": 6,
+      "embedding": [
+        0.05,
+        0.94,
+        0.08,
+        0.03
+      ]
+    },
+    {
+      "id": "casevec:005",
+      "title": "Reestructura de credito personal",
+      "description": "Cliente solicita ajustar plazo y pago mensual de un credito vigente.",
+      "case_type": "credito",
+      "channel": "web",
+      "priority": 7,
+      "embedding": [
+        0.08,
+        0.88,
+        0.1,
+        0.05
+      ]
+    },
+    {
+      "id": "casevec:006",
+      "title": "Inversion conservadora",
+      "description": "Cliente premier busca preservar capital con bajo riesgo y liquidez.",
+      "case_type": "inversion",
+      "channel": "web",
+      "priority": 5,
+      "embedding": [
+        0.04,
+        0.08,
+        0.93,
+        0.12
+      ]
+    },
+    {
+      "id": "casevec:007",
+      "title": "Mesa de dinero empresarial",
+      "description": "Tesoreria empresarial quiere invertir excedentes de corto plazo.",
+      "case_type": "inversion",
+      "channel": "web",
+      "priority": 6,
+      "embedding": [
+        0.03,
+        0.12,
+        0.88,
+        0.16
+      ]
+    },
+    {
+      "id": "casevec:008",
+      "title": "Busqueda de sucursal cercana",
+      "description": "Cliente necesita encontrar una sucursal con servicio premier cerca de su ubicacion.",
+      "case_type": "sucursal",
+      "channel": "app",
+      "priority": 4,
+      "embedding": [
+        0.02,
+        0.05,
+        0.12,
+        0.95
+      ]
+    },
+    {
+      "id": "casevec:009",
+      "title": "Deposito en ATM",
+      "description": "Cliente busca un cajero automatico cercano que acepte depositos.",
+      "case_type": "sucursal",
+      "channel": "app",
+      "priority": 4,
+      "embedding": [
+        0.04,
+        0.04,
+        0.14,
+        0.89
+      ]
+    },
+    {
+      "id": "casevec:010",
+      "title": "Autorizacion empresarial de alto monto",
+      "description": "Empresa requiere doble autorizacion y token para transferencias de alto monto.",
+      "case_type": "seguridad",
+      "channel": "web",
+      "priority": 8,
+      "embedding": [
+        0.65,
+        0.14,
+        0.08,
+        0.16
+      ]
+    }
+  ],
   "autocomplete": [
     {
       "key": "ac:bank_terms",
