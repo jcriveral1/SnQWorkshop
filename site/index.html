@@ -46,7 +46,7 @@
             <button data-copy>Copiar</button>
           </article>
           <article class="card">
-            <h3>Carga completa</h3>
+            <h3>Carga con redis-cli</h3>
             <p>Ejecuta estos comandos desde la raiz del proyecto.</p>
             <pre><code>redis-cli -u "$REDIS_URL" &lt; data/setup.redis
 redis-cli -u "$REDIS_URL" &lt; data/01_banking_documents.redis
@@ -57,16 +57,20 @@ redis-cli -u "$REDIS_URL" &lt; data/04_autocomplete.redis</code></pre>
           </article>
           <article class="card">
             <h3>Solo RedisInsight</h3>
-            <p>Abre Workbench o CLI, pega el contenido de data/all.redis y ejecutalo.</p>
-            <pre><code>data/all.redis</code></pre>
-            <button data-copy>Copiar ruta</button>
+            <p>Abre Workbench o CLI, copia el dataset completo y ejecutalo.</p>
+            <pre><code>Dataset HASH completo:
+data/all.redis</code></pre>
+            <button data-copy data-copy-url="/data/all.redis" data-copy-label="Copiar dataset HASH completo">Copiar dataset</button>
           </article>
           <article class="card">
             <h3>Version JSON</h3>
             <p>Usa RedisJSON con documentos JSON e indices ON JSON.</p>
-            <pre><code>data/json/all_json.redis
-queries_json.redis</code></pre>
-            <button data-copy>Copiar rutas</button>
+            <pre><code>Dataset JSON completo:
+data/json/all_json.redis
+
+Queries:
+queries_json_run.redis</code></pre>
+            <button data-copy data-copy-url="/data/json/all_json.redis" data-copy-label="Copiar dataset JSON completo">Copiar dataset</button>
           </article>
           <article class="card">
             <h3>Reset opcional</h3>

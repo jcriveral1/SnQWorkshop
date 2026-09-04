@@ -11,21 +11,31 @@ buttons.forEach((button) => {
     wrapper.append(block, button);
   }
 
+  const copyLabel = button.dataset.copyLabel || "Copiar comando";
+
   button.textContent = copyIcon;
-  button.setAttribute("aria-label", "Copiar comando");
-  button.setAttribute("title", "Copiar");
+  button.setAttribute("aria-label", copyLabel);
+  button.setAttribute("title", copyLabel);
 
   button.addEventListener("click", async () => {
-    const block = button.closest(".copy-block")?.querySelector("pre");
-    const text = block?.innerText ?? "";
-
     try {
+      const block = button.closest(".copy-block")?.querySelector("pre");
+      const sourceUrl = button.dataset.copyUrl;
+      const text = sourceUrl
+        ? await fetch(sourceUrl).then((response) => {
+            if (!response.ok) {
+              throw new Error(`No se pudo leer ${sourceUrl}`);
+            }
+            return response.text();
+          })
+        : block?.innerText ?? "";
+
       await navigator.clipboard.writeText(text);
       button.textContent = "✓";
       button.setAttribute("title", "Copiado");
       window.setTimeout(() => {
         button.textContent = copyIcon;
-        button.setAttribute("title", "Copiar");
+        button.setAttribute("title", copyLabel);
       }, 1400);
     } catch {
       button.textContent = "!";
