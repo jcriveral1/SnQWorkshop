@@ -88,6 +88,23 @@ button {
   cursor: pointer;
 }
 
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  border-radius: 6px;
+  padding: 9px 13px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.action-link:hover {
+  background: var(--accent-dark);
+}
+
 button {
   margin-top: 12px;
   background: var(--accent);

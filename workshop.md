@@ -11,7 +11,7 @@ Mostrar como Redis Search and Query ayuda a resolver busquedas, filtros y agrega
 | Minutos | Tema |
 | --- | --- |
 | 0-5 | Contexto: Redis como capa de busqueda rapida, no como core ledger |
-| 5-10 | Ingesta de datos HASH e indices con prefijos |
+| 5-10 | Ingesta de datos JSON e indices con prefijos |
 | 10-25 | Busquedas de texto: ranking, prefijo, exact match, stemming, spellcheck, autocomplete |
 | 25-34 | Filtros operacionales: multiples campos, rangos numericos, geo-radius |
 | 34-38 | Aggregations y faceting |
@@ -19,9 +19,9 @@ Mostrar como Redis Search and Query ayuda a resolver busquedas, filtros y agrega
 
 ## Datasets
 
-- `kb:*`: documentos de ayuda y politicas bancarias.
-- `product:*`: productos financieros para busqueda facetada y filtros.
-- `place:*`: sucursales y cajeros con coordenadas.
+- `kbj:*`: documentos de ayuda y politicas bancarias en RedisJSON.
+- `productj:*`: productos financieros para busqueda facetada y filtros.
+- `placej:*`: sucursales y cajeros con coordenadas.
 - `ac:bank_terms`: sugerencias para autocomplete.
 
 ## Mensaje principal

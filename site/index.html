@@ -24,14 +24,14 @@
         <div>
           <h2>Objetivo</h2>
           <p>
-            Cargar datasets bancarios pequenos en Redis Cloud, crear indices y
+            Cargar datasets bancarios pequenos en Redis Cloud como JSON, crear indices y
             demostrar busqueda, filtros, geosearch, autocomplete y agregaciones
             con comandos listos para copiar.
           </p>
         </div>
         <dl class="facts">
           <div><dt>Datasets</dt><dd>3 x 20 registros</dd></div>
-          <div><dt>Formato</dt><dd>Redis HASH</dd></div>
+          <div><dt>Formato</dt><dd>RedisJSON</dd></div>
           <div><dt>Indices</dt><dd>TEXT, TAG, NUMERIC, GEO</dd></div>
         </dl>
       </section>
@@ -41,56 +41,30 @@
         <div class="grid">
           <article class="card">
             <h3>Conexion</h3>
-            <p>Usa el endpoint de una instancia gratuita de Redis Cloud.</p>
-            <pre><code>export REDIS_URL="redis://default:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;"</code></pre>
-            <button data-copy>Copiar</button>
+            <p>Crea una cuenta gratis en Redis Cloud y despues abre la base en RedisInsight.</p>
+            <p><a class="action-link" href="https://redis.io/try-free/" target="_blank" rel="noreferrer">Crear cuenta gratis en Redis Cloud</a></p>
           </article>
           <article class="card">
-            <h3>Carga con redis-cli</h3>
-            <p>Ejecuta estos comandos desde la raiz del proyecto.</p>
-            <pre><code>redis-cli -u "$REDIS_URL" &lt; data/setup.redis
-redis-cli -u "$REDIS_URL" &lt; data/01_banking_documents.redis
-redis-cli -u "$REDIS_URL" &lt; data/02_banking_products.redis
-redis-cli -u "$REDIS_URL" &lt; data/03_branches_atms.redis
-redis-cli -u "$REDIS_URL" &lt; data/04_autocomplete.redis</code></pre>
-            <button data-copy>Copiar</button>
-          </article>
-          <article class="card">
-            <h3>Solo RedisInsight</h3>
+            <h3>Carga JSON en RedisInsight</h3>
             <p>Abre Workbench o CLI, copia el dataset completo y ejecutalo.</p>
-            <pre><code>Dataset HASH completo:
-data/all.redis</code></pre>
-            <button data-copy data-copy-url="/data/all.redis" data-copy-label="Copiar dataset HASH completo">Copiar dataset</button>
-          </article>
-          <article class="card">
-            <h3>Version JSON</h3>
-            <p>Usa RedisJSON con documentos JSON e indices ON JSON.</p>
             <pre><code>Dataset JSON completo:
-data/json/all_json.redis
-
-Queries:
-queries_json_run.redis</code></pre>
+data/json/all_json.redis</code></pre>
             <button data-copy data-copy-url="/data/json/all_json.redis" data-copy-label="Copiar dataset JSON completo">Copiar dataset</button>
           </article>
           <article class="card">
-            <h3>Reset opcional</h3>
-            <p>Usalo solo si quieres repetir el taller en la misma base.</p>
-            <pre><code>redis-cli -u "$REDIS_URL" &lt; data/reset.redis
-redis-cli -u "$REDIS_URL" &lt; data/setup.redis
-redis-cli -u "$REDIS_URL" &lt; data/01_banking_documents.redis
-redis-cli -u "$REDIS_URL" &lt; data/02_banking_products.redis
-redis-cli -u "$REDIS_URL" &lt; data/03_branches_atms.redis
-redis-cli -u "$REDIS_URL" &lt; data/04_autocomplete.redis</code></pre>
-            <button data-copy>Copiar</button>
+            <h3>Queries JSON</h3>
+            <p>Despues de la carga, usa estas queries en RedisInsight Workbench.</p>
+            <pre><code>queries_json_run.redis</code></pre>
+            <button data-copy data-copy-url="/queries_json_run.redis" data-copy-label="Copiar queries JSON">Copiar queries</button>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>Datasets JSON</h2>
+        <h2>Datos del lab</h2>
         <p class="section-copy">
-          La version JSON contiene los mismos registros que la version HASH,
-          pero en documentos legibles y con comandos `JSON.SET` para RedisJSON.
+          El lab usa documentos RedisJSON para que los asistentes vean datos
+          estructurados y rutas JSON en la definicion de indices.
         </p>
         <div class="index-notes">
           <article>
@@ -102,12 +76,12 @@ redis-cli -u "$REDIS_URL" &lt; data/04_autocomplete.redis</code></pre>
           <article>
             <h3>Carga en Redis</h3>
             <p><strong>Workbench:</strong> pega o importa `data/json/all_json.redis`.</p>
-            <p><strong>CLI:</strong> ejecuta `setup_json_indexes.redis` y despues `load_json.redis`.</p>
+            <p><strong>Contenido:</strong> indices `ON JSON`, comandos `JSON.SET` y sugerencias `FT.SUGADD`.</p>
           </article>
           <article>
             <h3>Queries</h3>
-            <p><strong>HASH:</strong> usa `queries.redis` contra `idx:kb`, `idx:product` e `idx:place`.</p>
-            <p><strong>JSON:</strong> usa `queries_json.redis` contra `idx:kb_json`, `idx:product_json` e `idx:place_json`.</p>
+            <p><strong>Workbench:</strong> copia `queries_json_run.redis` desde el boton de la seccion de preparacion.</p>
+            <p><strong>Indices:</strong> las busquedas usan `idx:kb_json`, `idx:product_json` e `idx:place_json`.</p>
           </article>
         </div>
       </section>
@@ -115,33 +89,33 @@ redis-cli -u "$REDIS_URL" &lt; data/04_autocomplete.redis</code></pre>
       <section>
         <h2>2. Indices</h2>
         <p class="section-copy">
-          Los indices usan prefijos para evitar indexar llaves no relacionadas.
-          Solo se indexan campos usados en las demos.
+          Los indices usan prefijos JSON para evitar indexar llaves no relacionadas.
+          Solo se indexan rutas usadas en las demos.
         </p>
-        <pre class="wide"><code>FT.CREATE idx:kb ON HASH PREFIX 1 kb: LANGUAGE spanish SCHEMA title TEXT WEIGHT 5.0 body TEXT WEIGHT 1.0 product TAG SORTABLE segment TAG SORTABLE channel TAG SORTABLE updated NUMERIC SORTABLE
+        <pre class="wide"><code>FT.CREATE idx:kb_json ON JSON PREFIX 1 kbj: LANGUAGE spanish SCHEMA $.title AS title TEXT WEIGHT 5.0 $.body AS body TEXT WEIGHT 1.0 $.product AS product TAG SORTABLE $.segment AS segment TAG SORTABLE $.channel AS channel TAG SORTABLE $.updated AS updated NUMERIC SORTABLE
 
-FT.CREATE idx:product ON HASH PREFIX 1 product: LANGUAGE spanish SCHEMA name TEXT WEIGHT 4.0 description TEXT WEIGHT 1.0 type TAG SORTABLE segment TAG SORTABLE currency TAG SORTABLE risk TAG SORTABLE channel TAG SORTABLE price NUMERIC SORTABLE rate NUMERIC SORTABLE balance_min NUMERIC SORTABLE categories TAG SORTABLE
+FT.CREATE idx:product_json ON JSON PREFIX 1 productj: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 4.0 $.description AS description TEXT WEIGHT 1.0 $.type AS type TAG SORTABLE $.segment AS segment TAG SORTABLE $.currency AS currency TAG SORTABLE $.risk AS risk TAG SORTABLE $.channel AS channel TAG SORTABLE $.price AS price NUMERIC SORTABLE $.rate AS rate NUMERIC SORTABLE $.balance_min AS balance_min NUMERIC SORTABLE $.categories[*] AS categories TAG SORTABLE
 
-FT.CREATE idx:place ON HASH PREFIX 1 place: LANGUAGE spanish SCHEMA name TEXT WEIGHT 3.0 kind TAG SORTABLE city TAG SORTABLE services TAG location GEO hours TAG SORTABLE</code></pre>
+FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 3.0 $.kind AS kind TAG SORTABLE $.city AS city TAG SORTABLE $.services[*] AS services TAG $.location AS location GEO $.hours AS hours TAG SORTABLE</code></pre>
         <button data-copy>Copiar indices</button>
         <div class="index-notes">
           <article>
-            <h3>idx:kb</h3>
-            <p><strong>Datos:</strong> documentos `kb:*` de ayuda, politicas y seguridad bancaria.</p>
-            <p><strong>Campos:</strong> `title` y `body` son TEXT para busqueda full-text; `title` tiene mas peso para mejorar ranking.</p>
-            <p><strong>Filtros:</strong> `product`, `segment` y `channel` son TAG porque se usan para coincidencia exacta y facetas.</p>
+            <h3>idx:kb_json</h3>
+            <p><strong>Datos:</strong> documentos `kbj:*` de ayuda, politicas y seguridad bancaria.</p>
+            <p><strong>Campos:</strong> `$.title` y `$.body` son TEXT para busqueda full-text; `title` tiene mas peso para mejorar ranking.</p>
+            <p><strong>Filtros:</strong> `$.product`, `$.segment` y `$.channel` son TAG porque se usan para coincidencia exacta y facetas.</p>
           </article>
           <article>
-            <h3>idx:product</h3>
-            <p><strong>Datos:</strong> productos financieros `product:*` como cuentas, tarjetas, creditos, seguros e inversiones.</p>
-            <p><strong>Campos:</strong> `name` y `description` son TEXT para busqueda por relevancia; `name` pesa mas.</p>
-            <p><strong>Filtros:</strong> `type`, `segment`, `currency`, `risk`, `channel` y `categories` son TAG; `price`, `rate` y `balance_min` son NUMERIC para rangos y ordenamiento.</p>
+            <h3>idx:product_json</h3>
+            <p><strong>Datos:</strong> productos financieros `productj:*` como cuentas, tarjetas, creditos, seguros e inversiones.</p>
+            <p><strong>Campos:</strong> `$.name` y `$.description` son TEXT para busqueda por relevancia; `name` pesa mas.</p>
+            <p><strong>Filtros:</strong> `$.type`, `$.segment`, `$.currency`, `$.risk`, `$.channel` y `$.categories[*]` son TAG; `$.price`, `$.rate` y `$.balance_min` son NUMERIC para rangos y ordenamiento.</p>
           </article>
           <article>
-            <h3>idx:place</h3>
-            <p><strong>Datos:</strong> sucursales y ATMs `place:*` con ciudad, servicios y coordenadas.</p>
-            <p><strong>Campos:</strong> `name` es TEXT para buscar por nombre; `kind`, `city`, `services` y `hours` son TAG para filtros exactos.</p>
-            <p><strong>Geo:</strong> `location` es GEO y permite consultas por radio con longitud, latitud, distancia y unidad.</p>
+            <h3>idx:place_json</h3>
+            <p><strong>Datos:</strong> sucursales y ATMs `placej:*` con ciudad, servicios y coordenadas.</p>
+            <p><strong>Campos:</strong> `$.name` es TEXT para buscar por nombre; `$.kind`, `$.city`, `$.services[*]` y `$.hours` son TAG para filtros exactos.</p>
+            <p><strong>Geo:</strong> `$.location` es GEO y permite consultas por radio con longitud, latitud, distancia y unidad.</p>
           </article>
         </div>
       </section>
@@ -151,11 +125,11 @@ FT.CREATE idx:place ON HASH PREFIX 1 place: LANGUAGE spanish SCHEMA name TEXT WE
         <div class="query-list">
           <article class="query">
             <h3>Ranking de documentos</h3>
-            <pre><code>FT.SEARCH idx:kb "tarjeta fraude" WITHSCORES RETURN 4 title product segment channel DIALECT 2
-FT.SEARCH idx:product "credito personal" WITHSCORES RETURN 5 name type segment rate price DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:kb_json "tarjeta fraude" WITHSCORES RETURN 4 title product segment channel DIALECT 2
+FT.SEARCH idx:product_json "credito personal" WITHSCORES RETURN 5 name type segment rate price DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
-              <p><strong>Datos:</strong> documentos `kb:*` y productos `product:*` con campos TEXT ponderados.</p>
+              <p><strong>Datos:</strong> documentos `kbj:*` y productos `productj:*` con campos TEXT ponderados.</p>
               <p><strong>Sintaxis:</strong> `WITHSCORES` muestra el score de relevancia; `RETURN` limita los campos devueltos.</p>
               <p><strong>Que demuestra:</strong> Redis rankea resultados por coincidencia textual y peso de campos, por ejemplo `title` o `name` pesan mas que la descripcion.</p>
             </div>
@@ -163,8 +137,8 @@ FT.SEARCH idx:product "credito personal" WITHSCORES RETURN 5 name type segment r
 
           <article class="query">
             <h3>Busqueda por prefijo</h3>
-            <pre><code>FT.SEARCH idx:kb "@title:transf*" RETURN 3 title product channel DIALECT 2
-FT.SEARCH idx:product "@name:cuent*" RETURN 4 name type segment price DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:kb_json "@title:transf*" RETURN 3 title product channel DIALECT 2
+FT.SEARCH idx:product_json "@name:cuent*" RETURN 4 name type segment price DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> titulos de documentos y nombres de productos.</p>
@@ -175,8 +149,8 @@ FT.SEARCH idx:product "@name:cuent*" RETURN 4 name type segment price DIALECT 2<
 
           <article class="query">
             <h3>Coincidencia exacta</h3>
-            <pre><code>FT.SEARCH idx:product "@type:{tarjeta} @segment:{empresa}" RETURN 5 name type segment price channel DIALECT 2
-FT.SEARCH idx:kb "@product:{seguridad} @channel:{app}" RETURN 4 title product segment channel DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:product_json "@type:{tarjeta} @segment:{empresa}" RETURN 5 name type segment price channel DIALECT 2
+FT.SEARCH idx:kb_json "@product:{seguridad} @channel:{app}" RETURN 4 title product segment channel DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> campos categóricos como `type`, `segment`, `product` y `channel`.</p>
@@ -187,11 +161,11 @@ FT.SEARCH idx:kb "@product:{seguridad} @channel:{app}" RETURN 4 title product se
 
           <article class="query">
             <h3>Stemming</h3>
-            <pre><code>FT.SEARCH idx:kb "inversiones" LANGUAGE spanish RETURN 3 title body product DIALECT 2
-FT.SEARCH idx:kb "creditos" LANGUAGE spanish RETURN 3 title body product DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:kb_json "inversiones" LANGUAGE spanish RETURN 3 title body product DIALECT 2
+FT.SEARCH idx:kb_json "creditos" LANGUAGE spanish RETURN 3 title body product DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
-              <p><strong>Datos:</strong> documentos `kb:*` indexados con `LANGUAGE spanish`.</p>
+              <p><strong>Datos:</strong> documentos `kbj:*` indexados con `LANGUAGE spanish`.</p>
               <p><strong>Sintaxis:</strong> `LANGUAGE spanish` aplica el stemmer del idioma al ejecutar la busqueda.</p>
               <p><strong>Que demuestra:</strong> una busqueda por plural puede encontrar variantes singulares como inversion o credito.</p>
             </div>
@@ -199,8 +173,8 @@ FT.SEARCH idx:kb "creditos" LANGUAGE spanish RETURN 3 title body product DIALECT
 
           <article class="query">
             <h3>Correccion ortografica</h3>
-            <pre><code>FT.SPELLCHECK idx:kb "hipotekario" DIALECT 2
-FT.SPELLCHECK idx:product "tarjta" DIALECT 2</code></pre>
+            <pre><code>FT.SPELLCHECK idx:kb_json "hipotekario" DIALECT 2
+FT.SPELLCHECK idx:product_json "tarjta" DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> vocabulario generado por los campos TEXT del indice.</p>
@@ -223,8 +197,8 @@ FT.SUGGET ac:bank_terms "cred" WITHSCORES</code></pre>
 
           <article class="query">
             <h3>Multiples campos</h3>
-            <pre><code>FT.SEARCH idx:product "@type:{credito} @segment:{premier}" RETURN 5 name type segment rate price DIALECT 2
-FT.SEARCH idx:product "@risk:{bajo} @channel:{app} @currency:{MXN}" RETURN 5 name type risk channel price DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:product_json "@type:{credito} @segment:{premier}" RETURN 5 name type segment rate price DIALECT 2
+FT.SEARCH idx:product_json "@risk:{bajo} @channel:{app} @currency:{MXN}" RETURN 5 name type risk channel price DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> productos financieros con etiquetas de tipo, segmento, riesgo, canal y moneda.</p>
@@ -235,8 +209,8 @@ FT.SEARCH idx:product "@risk:{bajo} @channel:{app} @currency:{MXN}" RETURN 5 nam
 
           <article class="query">
             <h3>Rango numerico</h3>
-            <pre><code>FT.SEARCH idx:product "@type:{credito} @rate:[10 20]" RETURN 4 name type rate price DIALECT 2
-FT.SEARCH idx:product "@price:[100 600]" SORTBY price ASC RETURN 4 name type price segment DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:product_json "@type:{credito} @rate:[10 20]" RETURN 4 name type rate price DIALECT 2
+FT.SEARCH idx:product_json "@price:[100 600]" SORTBY price ASC RETURN 4 name type price segment DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> productos con campos NUMERIC como `rate`, `price` y `balance_min`.</p>
@@ -247,11 +221,11 @@ FT.SEARCH idx:product "@price:[100 600]" SORTBY price ASC RETURN 4 name type pri
 
           <article class="query">
             <h3>Geo-radius</h3>
-            <pre><code>FT.SEARCH idx:place "@location:[-99.1677 19.4270 5 km]" RETURN 5 name kind city services location DIALECT 2
-FT.SEARCH idx:place "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]" RETURN 5 name kind city services location DIALECT 2</code></pre>
+            <pre><code>FT.SEARCH idx:place_json "@location:[-99.1677 19.4270 5 km]" RETURN 5 name kind city services location DIALECT 2
+FT.SEARCH idx:place_json "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]" RETURN 5 name kind city services location DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
-              <p><strong>Datos:</strong> sucursales y ATMs `place:*` con coordenadas en campo GEO.</p>
+              <p><strong>Datos:</strong> sucursales y ATMs `placej:*` con coordenadas en campo GEO.</p>
               <p><strong>Sintaxis:</strong> `@location:[lon lat radio unidad]` busca puntos dentro de un radio.</p>
               <p><strong>Que demuestra:</strong> encontrar cajeros o sucursales cercanas y combinar cercania con filtros como ciudad o tipo.</p>
             </div>
@@ -259,13 +233,13 @@ FT.SEARCH idx:place "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]" RET
 
           <article class="query">
             <h3>Aggregations & faceting</h3>
-            <pre><code>FT.AGGREGATE idx:product "*" GROUPBY 1 @type REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
-FT.AGGREGATE idx:product "@segment:{empresa}" APPLY "split(@categories, ',')" AS category_id GROUPBY 1 @category_id REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2</code></pre>
+            <pre><code>FT.AGGREGATE idx:product_json "*" GROUPBY 1 @type REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
+FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
-              <p><strong>Datos:</strong> productos con `type`, `segment` y lista de `categories` separada por comas.</p>
-              <p><strong>Sintaxis:</strong> `GROUPBY` agrupa, `REDUCE COUNT` cuenta, `APPLY split(...)` transforma categorias antes de agrupar.</p>
-              <p><strong>Que demuestra:</strong> facetas para contar productos por tipo o por categoria dentro de un segmento.</p>
+              <p><strong>Datos:</strong> productos con `type`, `segment` y `risk`.</p>
+              <p><strong>Sintaxis:</strong> `GROUPBY` agrupa, `REDUCE COUNT` cuenta y `SORTBY` ordena la faceta resultante.</p>
+              <p><strong>Que demuestra:</strong> facetas para contar productos por tipo o por nivel de riesgo dentro de un segmento.</p>
             </div>
           </article>
         </div>

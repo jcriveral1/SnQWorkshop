@@ -36,4 +36,4 @@ FT.SEARCH idx:place_json "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]
 
 # Aggregations & Faceting
 FT.AGGREGATE idx:product_json "*" GROUPBY 1 @type REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
-FT.AGGREGATE idx:product_json "@segment:{empresa}" APPLY "split(@categories, ',')" AS category_id GROUPBY 1 @category_id REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
+FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
