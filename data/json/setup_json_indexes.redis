@@ -4,4 +4,4 @@ FT.CREATE idx:product_json ON JSON PREFIX 1 productj: LANGUAGE spanish SCHEMA $.
 
 FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 3.0 $.kind AS kind TAG SORTABLE $.city AS city TAG SORTABLE $.services[*] AS services TAG $.location AS location GEO $.hours AS hours TAG SORTABLE
 
-FT.CREATE idx:case_vector_json ON JSON PREFIX 1 casevec: LANGUAGE spanish SCHEMA $.title AS title TEXT WEIGHT 3.0 $.description AS description TEXT $.case_type AS case_type TAG SORTABLE $.channel AS channel TAG SORTABLE $.priority AS priority NUMERIC SORTABLE $.embedding AS embedding VECTOR FLAT 6 TYPE FLOAT32 DIM 4 DISTANCE_METRIC COSINE
+FT.CREATE idx:case_vector_json ON JSON PREFIX 1 casevec: LANGUAGE spanish SCHEMA $.title AS title TEXT WEIGHT 3.0 $.description AS description TEXT $.case_type AS case_type TAG SORTABLE $.channel AS channel TAG SORTABLE $.priority AS priority NUMERIC SORTABLE $.v1 AS v1 NUMERIC SORTABLE $.v2 AS v2 NUMERIC SORTABLE $.v3 AS v3 NUMERIC SORTABLE $.v4 AS v4 NUMERIC SORTABLE $.embedding AS embedding VECTOR FLAT 6 TYPE FLOAT32 DIM 4 DISTANCE_METRIC COSINE

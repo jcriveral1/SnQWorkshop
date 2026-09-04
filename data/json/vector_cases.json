@@ -6,7 +6,16 @@
     "case_type": "fraude",
     "channel": "app",
     "priority": 9,
-    "embedding": [0.95, 0.1, 0.05, 0.02]
+    "embedding": [
+      0.95,
+      0.1,
+      0.05,
+      0.02
+    ],
+    "v1": 0.95,
+    "v2": 0.1,
+    "v3": 0.05,
+    "v4": 0.02
   },
   {
     "id": "casevec:002",
@@ -15,7 +24,16 @@
     "case_type": "fraude",
     "channel": "web",
     "priority": 10,
-    "embedding": [0.9, 0.08, 0.08, 0.04]
+    "embedding": [
+      0.9,
+      0.08,
+      0.08,
+      0.04
+    ],
+    "v1": 0.9,
+    "v2": 0.08,
+    "v3": 0.08,
+    "v4": 0.04
   },
   {
     "id": "casevec:003",
@@ -24,7 +42,16 @@
     "case_type": "seguridad",
     "channel": "app",
     "priority": 8,
-    "embedding": [0.82, 0.12, 0.12, 0.04]
+    "embedding": [
+      0.82,
+      0.12,
+      0.12,
+      0.04
+    ],
+    "v1": 0.82,
+    "v2": 0.12,
+    "v3": 0.12,
+    "v4": 0.04
   },
   {
     "id": "casevec:004",
@@ -33,7 +60,16 @@
     "case_type": "credito",
     "channel": "sucursal",
     "priority": 6,
-    "embedding": [0.05, 0.94, 0.08, 0.03]
+    "embedding": [
+      0.05,
+      0.94,
+      0.08,
+      0.03
+    ],
+    "v1": 0.05,
+    "v2": 0.94,
+    "v3": 0.08,
+    "v4": 0.03
   },
   {
     "id": "casevec:005",
@@ -42,7 +78,16 @@
     "case_type": "credito",
     "channel": "web",
     "priority": 7,
-    "embedding": [0.08, 0.88, 0.1, 0.05]
+    "embedding": [
+      0.08,
+      0.88,
+      0.1,
+      0.05
+    ],
+    "v1": 0.08,
+    "v2": 0.88,
+    "v3": 0.1,
+    "v4": 0.05
   },
   {
     "id": "casevec:006",
@@ -51,7 +96,16 @@
     "case_type": "inversion",
     "channel": "web",
     "priority": 5,
-    "embedding": [0.04, 0.08, 0.93, 0.12]
+    "embedding": [
+      0.04,
+      0.08,
+      0.93,
+      0.12
+    ],
+    "v1": 0.04,
+    "v2": 0.08,
+    "v3": 0.93,
+    "v4": 0.12
   },
   {
     "id": "casevec:007",
@@ -60,7 +114,16 @@
     "case_type": "inversion",
     "channel": "web",
     "priority": 6,
-    "embedding": [0.03, 0.12, 0.88, 0.16]
+    "embedding": [
+      0.03,
+      0.12,
+      0.88,
+      0.16
+    ],
+    "v1": 0.03,
+    "v2": 0.12,
+    "v3": 0.88,
+    "v4": 0.16
   },
   {
     "id": "casevec:008",
@@ -69,7 +132,16 @@
     "case_type": "sucursal",
     "channel": "app",
     "priority": 4,
-    "embedding": [0.02, 0.05, 0.12, 0.95]
+    "embedding": [
+      0.02,
+      0.05,
+      0.12,
+      0.95
+    ],
+    "v1": 0.02,
+    "v2": 0.05,
+    "v3": 0.12,
+    "v4": 0.95
   },
   {
     "id": "casevec:009",
@@ -78,7 +150,16 @@
     "case_type": "sucursal",
     "channel": "app",
     "priority": 4,
-    "embedding": [0.04, 0.04, 0.14, 0.89]
+    "embedding": [
+      0.04,
+      0.04,
+      0.14,
+      0.89
+    ],
+    "v1": 0.04,
+    "v2": 0.04,
+    "v3": 0.14,
+    "v4": 0.89
   },
   {
     "id": "casevec:010",
@@ -87,6 +168,15 @@
     "case_type": "seguridad",
     "channel": "web",
     "priority": 8,
-    "embedding": [0.65, 0.14, 0.08, 0.16]
+    "embedding": [
+      0.65,
+      0.14,
+      0.08,
+      0.16
+    ],
+    "v1": 0.65,
+    "v2": 0.14,
+    "v3": 0.08,
+    "v4": 0.16
   }
 ]

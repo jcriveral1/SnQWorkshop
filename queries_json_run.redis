@@ -18,3 +18,5 @@ FT.SEARCH idx:place_json "@location:[-99.1677 19.4270 5 km]" RETURN 5 name kind 
 FT.SEARCH idx:place_json "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]" RETURN 5 name kind city services location DIALECT 2
 FT.AGGREGATE idx:product_json "*" GROUPBY 1 @type REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
 FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
+FT.AGGREGATE idx:case_vector_json "*" LOAD 6 @title @case_type @v1 @v2 @v3 @v4 APPLY "(@v1*1.0)+(@v2*0.0)+(@v3*0.0)+(@v4*0.0)" AS similarity SORTBY 2 @similarity DESC LIMIT 0 2 DIALECT 2
+FT.AGGREGATE idx:case_vector_json "*" LOAD 6 @title @case_type @v1 @v2 @v3 @v4 APPLY "(@v1*0.0)+(@v2*1.0)+(@v3*0.0)+(@v4*0.0)" AS similarity SORTBY 2 @similarity DESC LIMIT 0 2 DIALECT 2

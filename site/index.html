@@ -123,8 +123,8 @@ FT.CREATE idx:case_vector_json ON JSON PREFIX 1 casevec: LANGUAGE spanish SCHEMA
           <article>
             <h3>idx:case_vector_json</h3>
             <p><strong>Datos:</strong> casos bancarios `casevec:*` con texto, tipo, canal, prioridad y embedding.</p>
-            <p><strong>Campos:</strong> `$.title` y `$.description` son TEXT; `$.case_type` y `$.channel` son TAG; `$.priority` es NUMERIC.</p>
-            <p><strong>Vector:</strong> `$.embedding` es VECTOR FLAT con `DIM 4` y distancia COSINE para explicar busqueda por similitud.</p>
+            <p><strong>Campos:</strong> `$.title` y `$.description` son TEXT; `$.case_type` y `$.channel` son TAG; `$.priority` y `$.v1` a `$.v4` son NUMERIC.</p>
+            <p><strong>Vector:</strong> `$.embedding` es VECTOR FLAT con `DIM 4`; `v1` a `v4` permiten una busqueda de similitud copiable en Workbench.</p>
           </article>
         </div>
       </section>
@@ -254,13 +254,13 @@ FT.AGGREGATE idx:product_json "@segment:{empresa}" GROUPBY 1 @risk REDUCE COUNT 
 
           <article class="query">
             <h3>Similitud vectorial</h3>
-            <pre><code>REDIS_URL="redis://default:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;" VECTOR_QUERY=fraude python3 scripts/vector_search.py
-REDIS_URL="redis://default:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;" VECTOR_QUERY=credito python3 scripts/vector_search.py</code></pre>
+            <pre><code>FT.AGGREGATE idx:case_vector_json "*" LOAD 6 @title @case_type @v1 @v2 @v3 @v4 APPLY "(@v1*1.0)+(@v2*0.0)+(@v3*0.0)+(@v4*0.0)" AS similarity SORTBY 2 @similarity DESC LIMIT 0 2 DIALECT 2
+FT.AGGREGATE idx:case_vector_json "*" LOAD 6 @title @case_type @v1 @v2 @v3 @v4 APPLY "(@v1*0.0)+(@v2*1.0)+(@v3*0.0)+(@v4*0.0)" AS similarity SORTBY 2 @similarity DESC LIMIT 0 2 DIALECT 2</code></pre>
             <button data-copy>Copiar</button>
             <div class="query-note">
               <p><strong>Datos:</strong> casos `casevec:*` con embeddings pequeños de 4 dimensiones.</p>
-              <p><strong>Sintaxis:</strong> el script ejecuta `FT.SEARCH` con `KNN 2 @embedding $vec AS vector_score` y pasa `$vec` como binario FLOAT32.</p>
-              <p><strong>Que demuestra:</strong> recuperar casos semanticamente similares, por ejemplo fraude parecido a phishing o bloqueo preventivo.</p>
+              <p><strong>Sintaxis:</strong> `LOAD` trae las dimensiones, `APPLY` calcula el producto punto contra un vector de consulta y `SORTBY similarity DESC` devuelve los mas parecidos.</p>
+              <p><strong>Que demuestra:</strong> recuperar casos similares desde Workbench, por ejemplo fraude parecido a phishing o credito parecido a reestructura.</p>
             </div>
           </article>
         </div>
