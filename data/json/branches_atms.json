@@ -1,0 +1,256 @@
+[
+  {
+    "id": "place:001",
+    "name": "Sucursal Reforma Premier",
+    "kind": "sucursal",
+    "city": "CDMX",
+    "services": [
+      "caja",
+      "ejecutivo",
+      "premier",
+      "hipotecario"
+    ],
+    "location": "-99.1677,19.4270",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:002",
+    "name": "Sucursal Polanco Empresa",
+    "kind": "sucursal",
+    "city": "CDMX",
+    "services": [
+      "empresa",
+      "caja",
+      "tesoreria"
+    ],
+    "location": "-99.1941,19.4336",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:003",
+    "name": "ATM Condesa Parque Mexico",
+    "kind": "atm",
+    "city": "CDMX",
+    "services": [
+      "retiro",
+      "deposito"
+    ],
+    "location": "-99.1698,19.4116",
+    "hours": "24h"
+  },
+  {
+    "id": "place:004",
+    "name": "ATM Roma Norte",
+    "kind": "atm",
+    "city": "CDMX",
+    "services": [
+      "retiro",
+      "consulta"
+    ],
+    "location": "-99.1600,19.4195",
+    "hours": "24h"
+  },
+  {
+    "id": "place:005",
+    "name": "Sucursal Santa Fe Corporativa",
+    "kind": "sucursal",
+    "city": "CDMX",
+    "services": [
+      "empresa",
+      "inversion",
+      "credito"
+    ],
+    "location": "-99.2606,19.3599",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:006",
+    "name": "ATM Universidad",
+    "kind": "atm",
+    "city": "CDMX",
+    "services": [
+      "retiro",
+      "deposito",
+      "consulta"
+    ],
+    "location": "-99.1859,19.3322",
+    "hours": "24h"
+  },
+  {
+    "id": "place:007",
+    "name": "Sucursal Guadalajara Centro",
+    "kind": "sucursal",
+    "city": "Guadalajara",
+    "services": [
+      "caja",
+      "ejecutivo",
+      "credito"
+    ],
+    "location": "-103.3496,20.6767",
+    "hours": "lun-sab"
+  },
+  {
+    "id": "place:008",
+    "name": "ATM Andares",
+    "kind": "atm",
+    "city": "Guadalajara",
+    "services": [
+      "retiro",
+      "consulta"
+    ],
+    "location": "-103.4156,20.7101",
+    "hours": "24h"
+  },
+  {
+    "id": "place:009",
+    "name": "Sucursal Zapopan Premier",
+    "kind": "sucursal",
+    "city": "Guadalajara",
+    "services": [
+      "premier",
+      "inversion",
+      "caja"
+    ],
+    "location": "-103.3918,20.6761",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:010",
+    "name": "Sucursal Monterrey Valle",
+    "kind": "sucursal",
+    "city": "Monterrey",
+    "services": [
+      "premier",
+      "hipotecario",
+      "caja"
+    ],
+    "location": "-100.3623,25.6509",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:011",
+    "name": "ATM San Pedro",
+    "kind": "atm",
+    "city": "Monterrey",
+    "services": [
+      "retiro",
+      "deposito"
+    ],
+    "location": "-100.4027,25.6602",
+    "hours": "24h"
+  },
+  {
+    "id": "place:012",
+    "name": "Sucursal Monterrey Empresa",
+    "kind": "sucursal",
+    "city": "Monterrey",
+    "services": [
+      "empresa",
+      "tesoreria",
+      "caja"
+    ],
+    "location": "-100.3161,25.6866",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:013",
+    "name": "Sucursal Puebla Angelopolis",
+    "kind": "sucursal",
+    "city": "Puebla",
+    "services": [
+      "caja",
+      "ejecutivo",
+      "credito"
+    ],
+    "location": "-98.2354,19.0326",
+    "hours": "lun-sab"
+  },
+  {
+    "id": "place:014",
+    "name": "ATM Puebla Centro",
+    "kind": "atm",
+    "city": "Puebla",
+    "services": [
+      "retiro",
+      "consulta"
+    ],
+    "location": "-98.1975,19.0433",
+    "hours": "24h"
+  },
+  {
+    "id": "place:015",
+    "name": "Sucursal Queretaro Jurica",
+    "kind": "sucursal",
+    "city": "Queretaro",
+    "services": [
+      "premier",
+      "caja",
+      "inversion"
+    ],
+    "location": "-100.4393,20.6537",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:016",
+    "name": "ATM Queretaro Centro",
+    "kind": "atm",
+    "city": "Queretaro",
+    "services": [
+      "retiro",
+      "deposito"
+    ],
+    "location": "-100.3899,20.5888",
+    "hours": "24h"
+  },
+  {
+    "id": "place:017",
+    "name": "Sucursal Merida Norte",
+    "kind": "sucursal",
+    "city": "Merida",
+    "services": [
+      "caja",
+      "ejecutivo",
+      "pyme"
+    ],
+    "location": "-89.6249,21.0367",
+    "hours": "lun-sab"
+  },
+  {
+    "id": "place:018",
+    "name": "ATM Merida Altabrisa",
+    "kind": "atm",
+    "city": "Merida",
+    "services": [
+      "retiro",
+      "consulta"
+    ],
+    "location": "-89.5845,21.0196",
+    "hours": "24h"
+  },
+  {
+    "id": "place:019",
+    "name": "Sucursal Tijuana Rio",
+    "kind": "sucursal",
+    "city": "Tijuana",
+    "services": [
+      "caja",
+      "empresa",
+      "credito"
+    ],
+    "location": "-117.0234,32.5250",
+    "hours": "lun-vie"
+  },
+  {
+    "id": "place:020",
+    "name": "ATM Tijuana Zona Centro",
+    "kind": "atm",
+    "city": "Tijuana",
+    "services": [
+      "retiro",
+      "deposito",
+      "consulta"
+    ],
+    "location": "-117.0382,32.5335",
+    "hours": "24h"
+  }
+]

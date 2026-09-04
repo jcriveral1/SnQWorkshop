@@ -1,0 +1,20 @@
+FT.SEARCH idx:kb_json "tarjeta fraude" WITHSCORES RETURN 4 title product segment channel DIALECT 2
+FT.SEARCH idx:product_json "credito personal" WITHSCORES RETURN 5 name type segment rate price DIALECT 2
+FT.SEARCH idx:kb_json "@title:transf*" RETURN 3 title product channel DIALECT 2
+FT.SEARCH idx:product_json "@name:cuent*" RETURN 4 name type segment price DIALECT 2
+FT.SEARCH idx:product_json "@type:{tarjeta} @segment:{empresa}" RETURN 5 name type segment price channel DIALECT 2
+FT.SEARCH idx:kb_json "@product:{seguridad} @channel:{app}" RETURN 4 title product segment channel DIALECT 2
+FT.SEARCH idx:kb_json "inversiones" LANGUAGE spanish RETURN 3 title body product DIALECT 2
+FT.SEARCH idx:kb_json "creditos" LANGUAGE spanish RETURN 3 title body product DIALECT 2
+FT.SPELLCHECK idx:kb_json "hipotekario" DIALECT 2
+FT.SPELLCHECK idx:product_json "tarjta" DIALECT 2
+FT.SUGGET ac:bank_terms "tar" WITHSCORES
+FT.SUGGET ac:bank_terms "cred" WITHSCORES
+FT.SEARCH idx:product_json "@type:{credito} @segment:{premier}" RETURN 5 name type segment rate price DIALECT 2
+FT.SEARCH idx:product_json "@risk:{bajo} @channel:{app} @currency:{MXN}" RETURN 5 name type risk channel price DIALECT 2
+FT.SEARCH idx:product_json "@type:{credito} @rate:[10 20]" RETURN 4 name type rate price DIALECT 2
+FT.SEARCH idx:product_json "@price:[100 600]" SORTBY price ASC RETURN 4 name type price segment DIALECT 2
+FT.SEARCH idx:place_json "@location:[-99.1677 19.4270 5 km]" RETURN 5 name kind city services location DIALECT 2
+FT.SEARCH idx:place_json "@city:{Guadalajara} @location:[-103.3918 20.6761 8 km]" RETURN 5 name kind city services location DIALECT 2
+FT.AGGREGATE idx:product_json "*" GROUPBY 1 @type REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2
+FT.AGGREGATE idx:product_json "@segment:{empresa}" APPLY "split(@categories, ',')" AS category_id GROUPBY 1 @category_id REDUCE COUNT 0 AS amount SORTBY 2 @amount DESC DIALECT 2

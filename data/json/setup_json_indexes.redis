@@ -1,0 +1,5 @@
+FT.CREATE idx:kb_json ON JSON PREFIX 1 kbj: LANGUAGE spanish SCHEMA $.title AS title TEXT WEIGHT 5.0 $.body AS body TEXT WEIGHT 1.0 $.product AS product TAG SORTABLE $.segment AS segment TAG SORTABLE $.channel AS channel TAG SORTABLE $.updated AS updated NUMERIC SORTABLE
+
+FT.CREATE idx:product_json ON JSON PREFIX 1 productj: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 4.0 $.description AS description TEXT WEIGHT 1.0 $.type AS type TAG SORTABLE $.segment AS segment TAG SORTABLE $.currency AS currency TAG SORTABLE $.risk AS risk TAG SORTABLE $.channel AS channel TAG SORTABLE $.price AS price NUMERIC SORTABLE $.rate AS rate NUMERIC SORTABLE $.balance_min AS balance_min NUMERIC SORTABLE $.categories[*] AS categories TAG SORTABLE
+
+FT.CREATE idx:place_json ON JSON PREFIX 1 placej: LANGUAGE spanish SCHEMA $.name AS name TEXT WEIGHT 3.0 $.kind AS kind TAG SORTABLE $.city AS city TAG SORTABLE $.services[*] AS services TAG $.location AS location GEO $.hours AS hours TAG SORTABLE

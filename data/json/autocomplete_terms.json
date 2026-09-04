@@ -1,0 +1,102 @@
+[
+  {
+    "key": "ac:bank_terms",
+    "term": "tarjeta digital",
+    "score": 10
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "tarjeta empresarial",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "transferencia SPEI",
+    "score": 10
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "transferencias empresariales",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "credito hipotecario",
+    "score": 10
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "credito personal",
+    "score": 9
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "credito automotriz",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "cuenta nomina",
+    "score": 9
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "cuenta digital",
+    "score": 10
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "cuenta pyme",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "fondo conservador",
+    "score": 7
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "fondo balanceado global",
+    "score": 6
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "seguro fraude digital",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "seguro cyber empresa",
+    "score": 7
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "token movil",
+    "score": 9
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "token empresarial",
+    "score": 7
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "sucursal premier",
+    "score": 8
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "atm deposito",
+    "score": 7
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "alertas inteligentes",
+    "score": 6
+  },
+  {
+    "key": "ac:bank_terms",
+    "term": "beneficiarios frecuentes",
+    "score": 6
+  }
+]

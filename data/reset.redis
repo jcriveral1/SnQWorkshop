@@ -1,0 +1,4 @@
+FT.DROPINDEX idx:kb DD
+FT.DROPINDEX idx:product DD
+FT.DROPINDEX idx:place DD
+DEL ac:bank_terms

@@ -1,0 +1,20 @@
+FT.SUGADD ac:bank_terms "tarjeta digital" 10
+FT.SUGADD ac:bank_terms "tarjeta empresarial" 8
+FT.SUGADD ac:bank_terms "transferencia SPEI" 10
+FT.SUGADD ac:bank_terms "transferencias empresariales" 8
+FT.SUGADD ac:bank_terms "credito hipotecario" 10
+FT.SUGADD ac:bank_terms "credito personal" 9
+FT.SUGADD ac:bank_terms "credito automotriz" 8
+FT.SUGADD ac:bank_terms "cuenta nomina" 9
+FT.SUGADD ac:bank_terms "cuenta digital" 10
+FT.SUGADD ac:bank_terms "cuenta pyme" 8
+FT.SUGADD ac:bank_terms "fondo conservador" 7
+FT.SUGADD ac:bank_terms "fondo balanceado global" 6
+FT.SUGADD ac:bank_terms "seguro fraude digital" 8
+FT.SUGADD ac:bank_terms "seguro cyber empresa" 7
+FT.SUGADD ac:bank_terms "token movil" 9
+FT.SUGADD ac:bank_terms "token empresarial" 7
+FT.SUGADD ac:bank_terms "sucursal premier" 8
+FT.SUGADD ac:bank_terms "atm deposito" 7
+FT.SUGADD ac:bank_terms "alertas inteligentes" 6
+FT.SUGADD ac:bank_terms "beneficiarios frecuentes" 6

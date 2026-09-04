@@ -1,0 +1,182 @@
+[
+  {
+    "id": "kb:001",
+    "title": "Como activar tu tarjeta digital",
+    "body": "Activa una tarjeta digital desde la app movil para compras seguras en internet y comercios.",
+    "product": "tarjeta",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260901
+  },
+  {
+    "id": "kb:002",
+    "title": "Reporte de fraude en tarjeta",
+    "body": "Si detectas cargos no reconocidos bloquea la tarjeta y levanta un reporte de fraude.",
+    "product": "tarjeta",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260824
+  },
+  {
+    "id": "kb:003",
+    "title": "Aclaracion de transferencia SPEI",
+    "body": "Consulta el estado de una transferencia SPEI y solicita aclaracion con clave de rastreo.",
+    "product": "transferencia",
+    "segment": "personal",
+    "channel": "web",
+    "updated": 20260812
+  },
+  {
+    "id": "kb:004",
+    "title": "Limites para transferencias empresariales",
+    "body": "Administra limites diarios por usuario, cuenta origen y autorizadores para transferencias empresariales.",
+    "product": "transferencia",
+    "segment": "empresa",
+    "channel": "web",
+    "updated": 20260730
+  },
+  {
+    "id": "kb:005",
+    "title": "Apertura de cuenta nomina",
+    "body": "La cuenta nomina permite recibir pagos de salario y acceder a beneficios sin comision mensual.",
+    "product": "cuenta",
+    "segment": "personal",
+    "channel": "sucursal",
+    "updated": 20260628
+  },
+  {
+    "id": "kb:006",
+    "title": "Cuenta pyme con autorizadores",
+    "body": "Configura autorizadores y permisos para operar cuentas pyme desde banca en linea.",
+    "product": "cuenta",
+    "segment": "empresa",
+    "channel": "web",
+    "updated": 20260802
+  },
+  {
+    "id": "kb:007",
+    "title": "Credito hipotecario tasa fija",
+    "body": "Simula un credito hipotecario con tasa fija, plazo flexible y pagos mensuales.",
+    "product": "credito",
+    "segment": "personal",
+    "channel": "web",
+    "updated": 20260520
+  },
+  {
+    "id": "kb:008",
+    "title": "Credito automotriz para clientes premier",
+    "body": "Financia auto nuevo o usado con enganche desde veinte por ciento para clientes premier.",
+    "product": "credito",
+    "segment": "premier",
+    "channel": "sucursal",
+    "updated": 20260712
+  },
+  {
+    "id": "kb:009",
+    "title": "Inversion pagare rendimiento",
+    "body": "Contrata un pagare bancario con rendimiento conocido y plazo desde siete dias.",
+    "product": "inversion",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260829
+  },
+  {
+    "id": "kb:010",
+    "title": "Fondos de inversion perfil conservador",
+    "body": "Elige fondos de inversion de bajo riesgo para conservar capital y diversificar ahorro.",
+    "product": "inversion",
+    "segment": "premier",
+    "channel": "web",
+    "updated": 20260817
+  },
+  {
+    "id": "kb:011",
+    "title": "Seguro de vida ligado a credito",
+    "body": "Protege a tu familia con seguro de vida asociado a credito personal o hipotecario.",
+    "product": "seguro",
+    "segment": "personal",
+    "channel": "sucursal",
+    "updated": 20260419
+  },
+  {
+    "id": "kb:012",
+    "title": "Seguro empresarial contra fraude",
+    "body": "Cobertura para eventos de fraude interno, robo de identidad y operaciones no autorizadas.",
+    "product": "seguro",
+    "segment": "empresa",
+    "channel": "web",
+    "updated": 20260805
+  },
+  {
+    "id": "kb:013",
+    "title": "Bloqueo temporal de tarjeta",
+    "body": "Bloquea y desbloquea temporalmente una tarjeta desde la app si no la encuentras.",
+    "product": "tarjeta",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260902
+  },
+  {
+    "id": "kb:014",
+    "title": "Alta de beneficiarios frecuentes",
+    "body": "Registra beneficiarios frecuentes para enviar transferencias con menos pasos y mayor control.",
+    "product": "transferencia",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260707
+  },
+  {
+    "id": "kb:015",
+    "title": "Comisiones de cuenta digital",
+    "body": "La cuenta digital no cobra manejo mensual si mantiene actividad durante el periodo.",
+    "product": "cuenta",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260808
+  },
+  {
+    "id": "kb:016",
+    "title": "Mesa de dinero empresarial",
+    "body": "Servicio de mesa de dinero para excedentes de tesoreria con instrumentos de corto plazo.",
+    "product": "inversion",
+    "segment": "empresa",
+    "channel": "web",
+    "updated": 20260610
+  },
+  {
+    "id": "kb:017",
+    "title": "Reestructura de credito personal",
+    "body": "Solicita reestructura de credito personal cuando necesitas ajustar pagos o plazo.",
+    "product": "credito",
+    "segment": "personal",
+    "channel": "sucursal",
+    "updated": 20260701
+  },
+  {
+    "id": "kb:018",
+    "title": "Token movil para autorizacion",
+    "body": "El token movil genera codigos dinamicos para autorizar transferencias y cambios sensibles.",
+    "product": "seguridad",
+    "segment": "personal",
+    "channel": "app",
+    "updated": 20260821
+  },
+  {
+    "id": "kb:019",
+    "title": "Prevencion de phishing bancario",
+    "body": "Aprende a identificar mensajes falsos, enlaces sospechosos y llamadas de suplantacion.",
+    "product": "seguridad",
+    "segment": "personal",
+    "channel": "web",
+    "updated": 20260901
+  },
+  {
+    "id": "kb:020",
+    "title": "Roles de banca corporativa",
+    "body": "Define roles de captura, consulta y autorizacion para operaciones de banca corporativa.",
+    "product": "cuenta",
+    "segment": "empresa",
+    "channel": "web",
+    "updated": 20260618
+  }
+]

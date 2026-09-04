@@ -1,0 +1,3 @@
+FT.DROPINDEX idx:kb_json DD
+FT.DROPINDEX idx:product_json DD
+FT.DROPINDEX idx:place_json DD
